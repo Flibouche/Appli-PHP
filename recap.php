@@ -18,9 +18,12 @@ session_start();
 </head>
 
 <body>
-    <div class="grid text-center">
+    <div class="grid text-center p-5">
         <a class="btn btn-primary" href="index.php" role="button">Ajouter produit</a>
-        <a class="btn btn-secondary disabled" href="recap.php" role="button">Panier</a>
+        <div class="position-relative d-inline-block">
+            <a class="btn btn-secondary disabled" href="recap.php" role="button">Panier</a>
+            <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= count($_SESSION['products']) ?></span>
+        </div>
         <h1>Récapitulatif de votre panier</h1>
         <?php
         if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {

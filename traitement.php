@@ -17,6 +17,9 @@ if (isset($_POST['submit'])) {
         ];
 
         $_SESSION['products'][] = $product;
+        
+        $_SESSION['message'] = "Produit ajouté !"; // En cas de réussite
+        $_SESSION['message'] = "Erreur"; // En cas d'échec
     }
 }
 

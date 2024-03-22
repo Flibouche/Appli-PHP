@@ -11,8 +11,8 @@ session_start();
     <!-- ========================== BOOTSTRAP =======================-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- ========================== CSS =======================-->
-    <link rel="stylesheet" href="style/style.css">
+    <!-- ========================== FONT AWESOME =======================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Récapitulatif des produits</title>
 </head>
@@ -22,7 +22,13 @@ session_start();
         <a class="btn btn-primary" href="index.php" role="button">Ajouter produit</a>
         <div class="position-relative d-inline-block">
             <a class="btn btn-secondary disabled" href="recap.php" role="button">Panier</a>
-            <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= count($_SESSION['products']) ?></span>
+            <?php
+            $nbProducts = 0;
+            if (isset($_SESSION['products'])) {
+                $nbProducts = count($_SESSION['products']);
+            }
+            ?>
+            <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= $nbProducts ?></span>
         </div>
         <h1>Récapitulatif de votre panier</h1>
         <?php
@@ -37,6 +43,7 @@ session_start();
             "<th>Prix</th>",
             "<th>Quantité</th>",
             "<th>Total</th>",
+            "<th><i class='fa-solid fa-trash'></i></th>",
             "</tr>",
             "</thead>",
             "<tbody>";
@@ -47,14 +54,16 @@ session_start();
                 "<td>" . $index . "</td>",
                 "<td>" . $product['name'] . "</td>",
                 "<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
-                "<td>" . $product['qtt'] . "</td>",
+                "<td class='quantity'> <i class='fa-solid fa-minus'></i> " . $product['qtt'] . " <i class='fa-solid fa-plus'></i></td>",
                 "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
+                "<td class='deleteBtn'>" . "<i class='fa-solid fa-xmark'?action=clear></i>" . "</td>",
                 "</tr>";
                 $totalGeneral += $product['total'];
             }
             echo "<tr>",
             "<td colspan=4>Total général : </td>",
             "<td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong</td>",
+            "<td><a class='btn btn-danger' href='traitement.php?action=clear' role='button' method='post'>Tout supprimer</a></td>",
             "</tr>",
             "</tbody>",
             "</table>";

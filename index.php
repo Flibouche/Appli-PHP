@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,13 @@ session_start()
             <a class="btn btn-secondary disabled" href="index.php" role="button">Ajouter produit</a>
             <div class="position-relative d-inline-block">
                 <a class="btn btn-primary" href="recap.php" role="button">Panier</a>
-                <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= count($_SESSION['products']) ?></span>
+                <?php
+                $nbProducts = 0;
+                if(isset($_SESSION['products'])) {
+                    $nbProducts = count($_SESSION['products']);
+                }
+                ?>
+                <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= $nbProducts ?></span>
             </div>
         <h1 class="text-primary">Ajouter un produit</h1>
         <form action="traitement.php" method="post">
@@ -53,3 +59,10 @@ session_start()
 </body>
 
 </html>
+
+<?php
+// Vérifie si une variable de session nommée 'message' est définie
+if (isset($_SESSION['message'])) {
+    echo $_SESSION['message']; // Affiche le contenu de la variable de session 'message'
+    unset($_SESSION['message']); // Supprime la variable de session 'message' afin qu'elle ne soit pas réaffichée après le chargement ou l'actualisation de la page
+}

@@ -5,34 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- ========================== BOOTSTRAP =======================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <title>Ajout produit</title>
 </head>
 
 <body>
-    <h1>Ajouter un produit</h1>
-    <form action="traitement.php" method="post">
-        <p>
-            <label>
-                Nom du produit :
-                <input type="text" name="name">
-            </label>
-        </p>
-        <p>
-            <label>
-                Prix du produit :
-                <input type="number" step="any" name="price">
-            </label>
-        </p>
-        <p>
-            <label>
-                Quantité désirée :
-                <input type="number" name="qtt" value="1">
-            </label>
-        </p>
-        <p>
-            <input type="submit" name="submit" value="Ajouter le produit">
-        </p>
-    </form>
+    <div class="grid text-center">
+
+        <a class="btn btn-secondary disabled" href="index.php" role="button">Ajouter produit</a>
+        <a class="btn btn-primary" href="recap.php" role="button">Panier</a>
+        <h1 class="text-primary">Ajouter un produit</h1>
+        <form action="traitement.php" method="post">
+            <p>
+                <label class="text-start">
+                    Nom du produit :
+                    <input class="form-control" type="text" name="name">
+                </label>
+            </p>
+            <p>
+                <label class="text-start">
+                    Prix du produit :
+                    <input class="form-control" type="number" step="any" name="price">
+                </label>
+            </p>
+            <p>
+                <label class="text-start">
+                    Quantité désirée :
+                    <input class="form-control" type="number" name="qtt" value="1">
+                </label>
+            </p>
+            <p>
+            <div id="liveAlertPlaceholder"></div>
+            <input class="btn btn-primary" id="liveAlertBtn" type="submit" name="submit" value="Ajouter le produit">
+            </p>
+
+
+        </form>
+    </div>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

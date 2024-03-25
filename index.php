@@ -29,7 +29,7 @@ session_start();
                 <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= $nbProducts ?></span>
             </div>
         <h1 class="text-primary">Ajouter un produit</h1>
-        <form action="traitement.php" method="post">
+        <form action="traitement.php?action=add" method="post">
             <p>
                 <label class="text-start">
                     Nom du produit :

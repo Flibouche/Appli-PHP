@@ -30,7 +30,7 @@ session_start();
             ?>
             <span class="position-absolute top-0 translate-middle px-2 bg-danger text-white rounded-circle"><?= $nbProducts ?></span>
         </div>
-        <h1>Récapitulatif de votre panier</h1>
+        <h1 class="text-primary">Récapitulatif de votre panier</h1>
         <?php
         if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
             echo "<p>Aucun produit en session...</p>";
@@ -52,10 +52,15 @@ session_start();
             foreach ($_SESSION['products'] as $index => $product) {
                 echo "<tr>",
                 "<td>" . $index . "</td>",
+
                 "<td>" . $product['name'] . "</td>",
+
                 "<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
-                "<td class='quantity'> <i class='fa-solid fa-minus'></i> " . $product['qtt'] . " <i class='fa-solid fa-plus'></i></td>",
+
+                "<td class='quantity'> <a class='fa-solid fa-minus' href='traitement.php?action=down-qtt&index=" . $index . "'></a> " . $product['qtt'] . " <a class='fa-solid fa-plus' href='traitement.php?action=up-qtt&index=" . $index . "'></a></td>",
+
                 "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
+
                 "<td class='deleteBtn'>" . "<i class='fa-solid fa-xmark'?action=clear></i>" . "</td>",
                 "</tr>";
                 $totalGeneral += $product['total'];

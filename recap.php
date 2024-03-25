@@ -50,6 +50,7 @@ session_start();
 
             $totalGeneral = 0;
             foreach ($_SESSION['products'] as $index => $product) {
+                $total = $product['qtt'] * $product['price'];
                 echo "<tr>",
                 "<td>" . $index . "</td>",
 
@@ -59,11 +60,11 @@ session_start();
 
                 "<td class='quantity'> <a class='fa-solid fa-minus' href='traitement.php?action=down-qtt&index=" . $index . "'></a> " . $product['qtt'] . " <a class='fa-solid fa-plus' href='traitement.php?action=up-qtt&index=" . $index . "'></a></td>",
 
-                "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
+                "<td>" . number_format($total, 2, ",", "&nbsp;") . "&nbsp;€</td>",
 
-                "<td class='deleteBtn'>" . "<i class='fa-solid fa-xmark'?action=clear></i>" . "</td>",
+                "<td class='deleteBtn'>" . "<a class='fa-solid fa-xmark' href='traitement.php?action=delete&index=" . $index . "'></a>" . "</td>",
                 "</tr>";
-                $totalGeneral += $product['total'];
+                $totalGeneral += $total;
             }
             echo "<tr>",
             "<td colspan=4>Total général : </td>",
@@ -73,6 +74,7 @@ session_start();
             "</tbody>",
             "</table>";
         }
+
         ?>
     </div>
 </body>

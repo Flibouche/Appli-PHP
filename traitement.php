@@ -23,15 +23,12 @@ if (isset($_GET['action'])) {
 
                     // Ajout du produit à la variable de session 'products'
                     $_SESSION['products'][] = $product;
+                    // Fait apparaître le message suivant selon le cas
+                    $_SESSION['message'] = "<div class='alert alert-success'>Produit ajouté !</div>"; // En cas de succès
+                } else {
+                    $_SESSION['message'] = "<div class='alert alert-danger'>Erreur, merci d'ajouter un produit !</div>"; // En cas d'echec
                 }
 
-                // Vérifie si la variable $product est évaluée à true, ce qui signifie que l'ajout du produit a réussi
-                if ($product) {
-                    $_SESSION['message'] = "Produit ajouté !"; // En cas de réussite
-                } else {
-                    $_SESSION['message'] = "Erreur !"; // En cas d'echec
-                }
-                
                 // Redirection vers la page 'index.php' après le traitement du formulaire
                 header("Location:index.php");
             };
